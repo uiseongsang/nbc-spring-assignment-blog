@@ -37,8 +37,11 @@ A4)
 
 
 ------
+# API 명세서
+<img width="1348" alt="image" src="https://github.com/uiseongsang/spring-lv2/assets/40707686/fcdc5b57-e15d-4b08-8775-0c62a2b8e748">
 
 # ERD
+
 
 
  
