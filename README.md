@@ -2,7 +2,8 @@
 
 강의 미완료로 프로젝트는 이후에 진행할 예정입니다
 
-12:59: 숙련 2주차 15 : 관심삼품 API 구현 진행중
+2023/6/30/12:59: 숙련 2주차 15 : 관심삼품 API 구현 진행중
+2023/7/3/16:00: lv2 - 로그인/회원가입 구현중
 
 # Questions
 
@@ -41,6 +42,7 @@ A4)
 <img width="1348" alt="image" src="https://github.com/uiseongsang/spring-lv2/assets/40707686/fcdc5b57-e15d-4b08-8775-0c62a2b8e748">
 
 # ERD
+![image](https://github.com/uiseongsang/spring-lv2/assets/40707686/c8450eea-f891-4bc0-b910-4a38079677b6)
 
 
 
