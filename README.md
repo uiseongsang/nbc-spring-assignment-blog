@@ -74,7 +74,8 @@ A4)
     - 선택한 게시글을 삭제하고 Client 로 성공했다는 메시지, 상태코드 반환하기
 
 # API 명세서
-<img width="1348" alt="image" src="https://github.com/uiseongsang/spring-lv2/assets/40707686/fcdc5b57-e15d-4b08-8775-0c62a2b8e748">
+<img width="1583" alt="image" src="https://github.com/uiseongsang/spring-lv2/assets/40707686/a35ca44c-d34c-4bda-9d2e-73ca76335c14">
+
 
 # ERD
 ![image](https://github.com/uiseongsang/spring-lv2/assets/40707686/c8450eea-f891-4bc0-b910-4a38079677b6)
