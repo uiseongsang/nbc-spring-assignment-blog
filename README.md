@@ -96,5 +96,10 @@ A4)
  ## Delete
  ![image](https://github.com/uiseongsang/spring-lv2/assets/40707686/ea034dc9-9a6f-4885-bcc7-8300c7ebf1de)
 
+여기까지 lv2 과제
+
+-> lv2 코드 보고 싶거나 복습하고 싶으면 인가된 사용자가 작성한 게시글 POST/PUT/DELETE Commit에서 새로운 브랜치 만들어서 보면 된다!!
+
+-------------------------
 
 
