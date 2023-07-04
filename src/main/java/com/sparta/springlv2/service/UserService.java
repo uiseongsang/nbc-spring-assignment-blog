@@ -2,6 +2,7 @@ package com.sparta.springlv2.service;
 
 import com.sparta.springlv2.dto.AuthRequestDto;
 import com.sparta.springlv2.entity.User;
+import com.sparta.springlv2.entity.UserRoleEnum;
 import com.sparta.springlv2.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +20,7 @@ public class UserService {
     public void signup(AuthRequestDto requestDto) {
         String username = requestDto.getUsername();
         String password = passwordEncoder.encode(requestDto.getPassword());
+        UserRoleEnum role = requestDto.getRole();
 
         // 회원 중복 확인
         Optional<User> checkUsername = userRepository.findByUsername(username);
@@ -27,7 +29,7 @@ public class UserService {
         }
 
         // 사용자 등록
-        User user = new User(username,password);
+        User user = new User(username,password,role);
         userRepository.save(user);
     }
 

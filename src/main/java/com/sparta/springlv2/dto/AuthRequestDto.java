@@ -1,5 +1,6 @@
 package com.sparta.springlv2.dto;
 
+import com.sparta.springlv2.entity.UserRoleEnum;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,4 +16,5 @@ public class AuthRequestDto {
             message = "최소 8자 이상, 15자 이하이며 알파벳 대소문자(a~z, A~Z), 숫자(0~9)으로 구성")
     private String password;
 
+    private UserRoleEnum role; // 회원 권한 (ADMIN, USER)
 }

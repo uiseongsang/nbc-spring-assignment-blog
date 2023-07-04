@@ -38,7 +38,7 @@ public class UserController {
         userService.login(requestDto);
 
         // JWT 생성 및 쿠키에 저장 후 res 객체에 추가
-        res.addHeader(JwtUtil.AUTHORIZATION_HEADER, jwtUtil.createToken(requestDto.getUsername()));
+        res.addHeader(JwtUtil.AUTHORIZATION_HEADER, jwtUtil.createToken(requestDto.getUsername(),requestDto.getRole()));
 
         return ResponseEntity.ok().body(new ApiResponseDto("로그인 성공", HttpStatus.CREATED.value()));
     }
