@@ -26,9 +26,11 @@ A3) JWT는 따로 JWT 토큰을 저장할 필요없이 토큰자체를 브라우
 Q4) 반대로 JWT를 사용한 인증/인가의 한계점은 무엇일까요?
 
 A4)
-1. 구현의 복잡도가 생각보다 많다
+1. 구현의 복잡도가 생각보다 많다.
+   
 2. JWT에 담는 내용 즉, JWT 길이가 길어지면 네트워크 비용이 증가한다.
-3.Secret Key 유출시 JWT 조작이 가능하다 현재 프로젝트에선 application.properties파일에 JWT secret Key를 설정 하는데 보통은 이렇게 허술하게 관리되지 않고 실제로 키를 볼수 없다.
+   
+3. Secret Key 유출시 JWT 조작이 가능하다 현재 프로젝트에선 application.properties파일에 JWT secret Key를 설정 하는데 보통은 이렇게 허술하게 관리되지 않고 실제로 키를 볼수 없다.
 오직관리자만이 알수 있게 따로 관리된다. 왜냐하면 저 키를 알면 값을 다 디코딩 할수 있기 떄문이다.
 
 
@@ -72,7 +74,8 @@ A4)
     - 선택한 게시글을 삭제하고 Client 로 성공했다는 메시지, 상태코드 반환하기
 
 # API 명세서
-<img width="1348" alt="image" src="https://github.com/uiseongsang/spring-lv2/assets/40707686/fcdc5b57-e15d-4b08-8775-0c62a2b8e748">
+<img width="1583" alt="image" src="https://github.com/uiseongsang/spring-lv2/assets/40707686/a35ca44c-d34c-4bda-9d2e-73ca76335c14">
+
 
 # ERD
 ![image](https://github.com/uiseongsang/spring-lv2/assets/40707686/c8450eea-f891-4bc0-b910-4a38079677b6)
