@@ -10,22 +10,17 @@ public class PostResponseDto {
     private Long id;
     private String title;
     private String content;
-    private String author;
+    private String username;
     private LocalDateTime createAt;
     private LocalDateTime modifiedAt;
-    private Boolean success;
 
     public PostResponseDto(Post post){
         this.id = post.getId();
         this.title = post.getTitle();
         this.content = post.getContent();
-        this.author = post.getAuthor();
+        this.username = post.getUser().getUsername();
         this.createAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();
-    }
-
-    public PostResponseDto(Boolean success) {
-        this.success = success;
     }
 }
 

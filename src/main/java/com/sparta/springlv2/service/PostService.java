@@ -1,13 +1,17 @@
 package com.sparta.springlv2.service;
 
+import com.sparta.springlv2.dto.PostListResponseDto;
 import com.sparta.springlv2.dto.PostRequestDto;
 import com.sparta.springlv2.dto.PostResponseDto;
 import com.sparta.springlv2.entity.Post;
+import com.sparta.springlv2.entity.User;
 import com.sparta.springlv2.repository.PostRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.RejectedExecutionException;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -17,14 +21,15 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public PostResponseDto createPost(PostRequestDto requestDto) {
+    public PostResponseDto createPost(PostRequestDto requestDto, User user) {
         // RequestDto -> Entity -> ResponseDto
 
         // RequestDto -> Entity
         Post post = new Post(requestDto);
+        post.setUser(user);
 
         // DB 저장
-        Post savePost = postRepository.save(post);
+        postRepository.save(post);
 
         // Entity -> ResponseDto
         PostResponseDto postResponseDto = new PostResponseDto(post);
@@ -32,12 +37,15 @@ public class PostService {
         return postResponseDto;
     }
 
-    public List<PostResponseDto> getPosts() {
+    public PostListResponseDto getPosts() {
         // DB 조회
-        return postRepository.findAllByOrderByCreatedAtDesc().stream().map(PostResponseDto::new).toList();
+        List<PostResponseDto> postList = postRepository.findAll().stream()
+                .map(PostResponseDto::new)
+                .collect(Collectors.toList());
+        return new PostListResponseDto(postList);
     }
 
-    public PostResponseDto getPost(Long id, PostRequestDto requestDto) {
+    public PostResponseDto getPost(Long id) {
         // 해당 포스트가 DB에 있는지 체크
         Post post = findPost(id);
 
@@ -45,42 +53,38 @@ public class PostService {
     }
 
     @Transactional
-    public PostResponseDto updatePost(Long id, PostRequestDto requestDto) {
+    public PostResponseDto updatePost(Long id, PostRequestDto requestDto, User user) {
         // 해당 포스트가 DB에 있는지 체크
         Post post = findPost(id);
 
-        if(validatePassword(post.getPassword(),requestDto.getPassword()) == true) {
-            // 내용 수정
-            post.update(requestDto);
-        } else {
-            System.out.println("비번이 틀립니다");
+        // 사용자 체크
+        if(!post.getUser().equals(user)) {
+            throw new RejectedExecutionException();
         }
+
+        // 내용 수정
+        post.setTitle(requestDto.getTitle());
+        post.setContent(requestDto.getContent());
+
         return new PostResponseDto(post);
     }
 
-    public void deletePost(Long id, String password) {
+    public void deletePost(Long id, User user) {
         // 해당 포스트가 DB에 있는지 체크
         Post post = findPost(id);
 
-        if(validatePassword(post.getPassword(),password) == true) {
-            // 내용 삭제
-            postRepository.delete(post);
-        } else {
-            System.out.println("비번이 틀립니다");
+        // 사용자 체크
+        if(!post.getUser().equals(user)) {
+            throw new RejectedExecutionException();
         }
+        // 내용 삭제
+        postRepository.delete(post);
     }
 
-    private Boolean validatePassword(String password1, String password2){
-        if(password1.equals(password2)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
     private Post findPost(Long id) {
         // Optional Check
         return postRepository.findById(id).orElseThrow( () ->
-                new IllegalArgumentException()
+                new IllegalArgumentException("선택한 게시글은 존재하지 않습니다")
         );
     }
 }
