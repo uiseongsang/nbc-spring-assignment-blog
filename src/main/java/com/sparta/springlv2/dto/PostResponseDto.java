@@ -4,6 +4,8 @@ import com.sparta.springlv2.entity.Post;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.List;
 
 @Getter
 public class PostResponseDto {
@@ -13,6 +15,7 @@ public class PostResponseDto {
     private String username;
     private LocalDateTime createAt;
     private LocalDateTime modifiedAt;
+    private List<CommentResponseDto> comments;
 
     public PostResponseDto(Post post){
         this.id = post.getId();
@@ -21,6 +24,10 @@ public class PostResponseDto {
         this.username = post.getUser().getUsername();
         this.createAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();
+        this.comments = post.getComments().stream()
+                .map(CommentResponseDto::new)
+                .sorted(Comparator.comparing(CommentResponseDto::getCreatedAt).reversed())
+                .toList();
     }
 }
 

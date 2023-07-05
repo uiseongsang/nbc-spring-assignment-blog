@@ -11,13 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 @Slf4j
 @Controller
@@ -35,7 +31,11 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<ApiResponseDto> login(@RequestBody AuthRequestDto requestDto, HttpServletResponse res){
-        userService.login(requestDto);
+        try {
+            userService.login(requestDto);
+        } catch (IllegalArgumentException e) {
+            ResponseEntity.badRequest().body(new ApiResponseDto("회원을 찾을 수 없습니다",HttpStatus.BAD_REQUEST.value()));
+        }
 
         // JWT 생성 및 쿠키에 저장 후 res 객체에 추가
         res.addHeader(JwtUtil.AUTHORIZATION_HEADER, jwtUtil.createToken(requestDto.getUsername(),requestDto.getRole()));
@@ -44,17 +44,13 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<ApiResponseDto> signup(@Valid @RequestBody AuthRequestDto requestDto, BindingResult bindingResult) {
-        // Validation 예외처리
-        List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-        if(fieldErrors.size() > 0) {
-            for (FieldError fieldError : bindingResult.getFieldErrors()) {
-                log.error(fieldError.getField() + " 필드 : " + fieldError.getDefaultMessage());
-            }
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<ApiResponseDto> signup(@Valid @RequestBody AuthRequestDto requestDto) {
 
-        userService.signup(requestDto);
+        try {
+            userService.signup(requestDto);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(new ApiResponseDto("중복된 username입니다",HttpStatus.BAD_REQUEST.value()));
+        }
 
         return ResponseEntity.status(201).body(new ApiResponseDto("회원가입 성공", HttpStatus.CREATED.value()));
     }

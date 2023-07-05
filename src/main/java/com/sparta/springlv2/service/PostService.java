@@ -82,7 +82,7 @@ public class PostService {
         postRepository.delete(post);
     }
 
-    private Post findPost(Long id) {
+    public Post findPost(Long id) {
         // Optional Check
         return postRepository.findById(id).orElseThrow( () ->
                 new IllegalArgumentException("선택한 게시글은 존재하지 않습니다")
