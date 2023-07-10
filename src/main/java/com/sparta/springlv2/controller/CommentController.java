@@ -28,10 +28,9 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("/comments")
-    public ResponseEntity<CommentResponseDto> createComment(@AuthenticationPrincipal UserDetailsImpl userDetails, @RequestBody CommentRequestDto requestDto) {
+    public ResponseEntity<ApiResponseDto> createComment(@AuthenticationPrincipal UserDetailsImpl userDetails, @RequestBody CommentRequestDto requestDto) {
         CommentResponseDto result = commentService.createComment(requestDto, userDetails.getUser());
-
-        return ResponseEntity.status(201).body(result);
+        return ResponseEntity.ok().body(new ApiResponseDto("댓글 작성이 되었습니다", HttpStatus.CREATED.value()));
     }
 
     @PutMapping("/comments/{id}")
