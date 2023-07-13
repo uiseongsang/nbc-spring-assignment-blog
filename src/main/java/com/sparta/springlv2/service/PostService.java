@@ -40,7 +40,7 @@ public class PostService {
 
     public PostListResponseDto getPosts() {
         // DB 조회
-        List<PostResponseDto> postList = postRepository.findAll().stream()
+        List<PostResponseDto> postList = postRepository.findAllByOrderByCreatedAtDesc().stream()
                 .map(PostResponseDto::new)
                 .collect(Collectors.toList());
         return new PostListResponseDto(postList);

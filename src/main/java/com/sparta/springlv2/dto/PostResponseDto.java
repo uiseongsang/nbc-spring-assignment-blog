@@ -26,7 +26,7 @@ public class PostResponseDto {
         this.modifiedAt = post.getModifiedAt();
         this.commentList = post.getCommentList().stream()
                 .map(CommentResponseDto::new)
-                .sorted(Comparator.comparing(CommentResponseDto::getCreatedAt).reversed())
+                .sorted(Comparator.comparing(CommentResponseDto::getCreatedAt).reversed()) // 작성 날짜 순서
                 .toList();
     }
 }
