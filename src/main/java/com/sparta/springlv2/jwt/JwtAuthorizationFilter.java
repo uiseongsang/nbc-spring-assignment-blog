@@ -40,6 +40,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         String tokenValue = jwtUtil.getJwtFromHeader(req);
 
         if(tokenValue != null) {
+            log.info("토큰이 있음");
             if(!jwtUtil.validateToken(tokenValue)){
                 ApiResponseDto responseDto = new ApiResponseDto("토큰이 유효하지 않습니다", HttpStatus.BAD_REQUEST.value());
                 res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -49,6 +50,9 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             }
             Claims info = jwtUtil.getUserInfoFromToken(tokenValue);
             setAuthentication(info.getSubject());
+        }
+        else {
+            log.info("토큰이 없음");
         }
         filterChain.doFilter(req, res);
     }
