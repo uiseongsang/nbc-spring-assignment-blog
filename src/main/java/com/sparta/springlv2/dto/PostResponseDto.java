@@ -15,7 +15,7 @@ public class PostResponseDto {
     private String username;
     private LocalDateTime createAt;
     private LocalDateTime modifiedAt;
-    private List<CommentResponseDto> comments;
+    private List<CommentResponseDto> commentList;
 
     public PostResponseDto(Post post){
         this.id = post.getId();
@@ -24,7 +24,7 @@ public class PostResponseDto {
         this.username = post.getUser().getUsername();
         this.createAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();
-        this.comments = post.getComments().stream()
+        this.commentList = post.getCommentList().stream()
                 .map(CommentResponseDto::new)
                 .sorted(Comparator.comparing(CommentResponseDto::getCreatedAt).reversed())
                 .toList();

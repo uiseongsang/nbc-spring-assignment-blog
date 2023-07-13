@@ -29,7 +29,7 @@ public class Post extends Timestamped {
     private User user;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
-    private List<Comment> comments;
+    private List<Comment> commentList;
 
     public Post(PostRequestDto requestDto) {
         this.title = requestDto.getTitle();
