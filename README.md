@@ -401,10 +401,13 @@ A5)
 -------
 
 # API 명세서
-<img width="1433" alt="image" src="https://github.com/uiseongsang/nbc-spring-assignment-blog/assets/40707686/8d9ea898-2fa3-485b-964a-0b039eb88d66">
+<img width="1509" alt="image" src="https://github.com/uiseongsang/nbc-spring-assignment-blog/assets/40707686/990e9140-0a99-45c2-8d7e-824ce9237f88">
+
 
 -------
 
 # ERD
-<img width="820" alt="image" src="https://github.com/uiseongsang/nbc-spring-assignment-blog/assets/40707686/5dfae1d1-747c-4ab2-85f7-1f7150697002">
+<img width="1157" alt="image" src="https://github.com/uiseongsang/nbc-spring-assignment-blog/assets/40707686/6f31459d-279c-4b05-9108-8924c9d5c248">
+<img width="727" alt="image" src="https://github.com/uiseongsang/nbc-spring-assignment-blog/assets/40707686/269ecc7c-3daf-4d4f-9640-b478ae2bfebd">
+
 
