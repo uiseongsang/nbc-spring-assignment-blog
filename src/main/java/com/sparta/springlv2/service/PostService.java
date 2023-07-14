@@ -3,10 +3,11 @@ package com.sparta.springlv2.service;
 import com.sparta.springlv2.dto.PostListResponseDto;
 import com.sparta.springlv2.dto.PostRequestDto;
 import com.sparta.springlv2.dto.PostResponseDto;
-import com.sparta.springlv2.entity.Post;
-import com.sparta.springlv2.entity.User;
-import com.sparta.springlv2.entity.UserRoleEnum;
+import com.sparta.springlv2.entity.*;
+import com.sparta.springlv2.repository.CommentLikeRepository;
+import com.sparta.springlv2.repository.PostLikeRepository;
 import com.sparta.springlv2.repository.PostRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,12 +16,11 @@ import java.util.concurrent.RejectedExecutionException;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
-
-    public PostService(PostRepository postRepository) {
-        this.postRepository = postRepository;
-    }
+    private final CommentLikeRepository commentLikeRepository;
+    private final PostLikeRepository postLikeRepository;
 
     public PostResponseDto createPost(PostRequestDto requestDto, User user) {
         // RequestDto -> Entity -> ResponseDto
@@ -78,6 +78,17 @@ public class PostService {
         if(!user.getRole().equals(UserRoleEnum.ADMIN) && !post.getUser().equals(user)) {
             throw new RejectedExecutionException();
         }
+
+        CommentLike commentLike = commentLikeRepository.findByPostIdAndUser(id,user);
+        if(commentLike != null) {
+            commentLikeRepository.delete(commentLike);
+        }
+
+        PostLike postLike = postLikeRepository.findByPostIdAndUser(id,user);
+        if(postLike != null) {
+            postLikeRepository.delete(postLike);
+        }
+
         // 내용 삭제
         postRepository.delete(post);
     }
