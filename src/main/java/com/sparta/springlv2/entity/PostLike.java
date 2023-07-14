@@ -8,31 +8,32 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-//@Table(name = "likes")
+@Table(name = "postlikes")
 @NoArgsConstructor
-@IdClass(LikeId.class)
-public class Likes {
+public class PostLike {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column
     private boolean isLiked;
 
-    @Id
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
 
-//    @Id
-//    @ManyToOne
-//    @JoinColumn(name = "comment_id")
-//    private Comment comment;
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "comment_id", nullable = true)
+    private Comment comment;
 
-    public Likes(boolean isLiked, User user, Post post) {
+    public PostLike(boolean isLiked, User user, Post post) {
         this.isLiked = isLiked;
         this.user = user;
         this.post = post;
     }
 }
+
+

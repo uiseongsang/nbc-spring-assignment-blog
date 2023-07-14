@@ -2,8 +2,7 @@ package com.sparta.springlv2.controller;
 
 import com.sparta.springlv2.dto.ApiResponseDto;
 import com.sparta.springlv2.security.UserDetailsImpl;
-import com.sparta.springlv2.service.LikeService;
-import lombok.NoArgsConstructor;
+import com.sparta.springlv2.service.PostLikeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -20,24 +19,22 @@ import java.util.concurrent.RejectedExecutionException;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
-public class LikeController {
+public class PostLikeController {
 
-    private final LikeService likeService;
+    private final PostLikeService postLikeService;
 
     @PostMapping("/post/{post_id}/likes")
     public ResponseEntity<ApiResponseDto> toggleLikeOnPost(@PathVariable Long post_id, @AuthenticationPrincipal UserDetailsImpl userDetails){
 
         try{
-            boolean isLiked = likeService.checkLiked(post_id, userDetails.getUser());
+            boolean isLiked = postLikeService.checkLiked(post_id, userDetails.getUser());
 
             if(isLiked) {
-                log.info("좋아요 취소");
-                likeService.removeLikeOnPost(post_id,userDetails.getUser());
-                return ResponseEntity.ok().body( new ApiResponseDto("좋아요 취소가 되었습니다.", HttpStatus.OK.value()));
+                postLikeService.removeLikeOnPost(post_id,userDetails.getUser());
+                return ResponseEntity.ok().body( new ApiResponseDto("게시글 좋아요 취소가 되었습니다.", HttpStatus.OK.value()));
             } else {
-                log.info("좋아요");
-                likeService.addLikeOnPost(post_id,userDetails.getUser());
-                return ResponseEntity.ok().body(new ApiResponseDto("좋아요 생성되었습니다", HttpStatus.CREATED.value()));
+                postLikeService.addLikeOnPost(post_id,userDetails.getUser());
+                return ResponseEntity.ok().body(new ApiResponseDto("게시글 좋아요 생성되었습니다", HttpStatus.CREATED.value()));
             }
         } catch (RejectedExecutionException e){
             return ResponseEntity.badRequest().body(new ApiResponseDto("유효하지 않는 토큰 입니다.", HttpStatus.UNAUTHORIZED.value()));

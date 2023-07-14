@@ -19,13 +19,14 @@ public class Comment extends Timestamped {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = true)
     private Long id;
 
     @Column(nullable = false)
     private String body; // 본문
 
-//    @Column
-//    private Long likeCnt = 0L;
+    @Column
+    private Long likeCnt = 0L;
 
     @ManyToOne
     @JoinColumn(name = "post_id")
@@ -49,6 +50,10 @@ public class Comment extends Timestamped {
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public void setLikeCnt(Long likeCnt) {
+        this.likeCnt = likeCnt;
     }
 }
 
