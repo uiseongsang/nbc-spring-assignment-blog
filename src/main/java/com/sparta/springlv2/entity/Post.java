@@ -25,6 +25,9 @@ public class Post extends Timestamped {
     @Column(name = "content", nullable = false, length = 500)
     private String content;
 
+    @Column
+    private Long likeCnt = 0L;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
