@@ -24,6 +24,9 @@ public class Comment extends Timestamped {
     @Column(nullable = false)
     private String body; // 본문
 
+//    @Column
+//    private Long likeCnt = 0L;
+
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;

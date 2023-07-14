@@ -4,15 +4,14 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.mapping.ToOne;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "likes")
-@IdClass(LikeId.class)
+//@Table(name = "likes")
 @NoArgsConstructor
-public class Like {
+@IdClass(LikeId.class)
+public class Likes {
     @Column
     private boolean isLiked;
 
@@ -21,15 +20,17 @@ public class Like {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Id
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @ManyToOne
-    @JoinColumn(name = "comment_id")
-    private Comment comment;
+//    @Id
+//    @ManyToOne
+//    @JoinColumn(name = "comment_id")
+//    private Comment comment;
 
-    public Like(boolean isLiked, User user, Post post) {
+    public Likes(boolean isLiked, User user, Post post) {
         this.isLiked = isLiked;
         this.user = user;
         this.post = post;
