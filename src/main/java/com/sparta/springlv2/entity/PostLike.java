@@ -25,10 +25,6 @@ public class PostLike {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "comment_id", nullable = true)
-    private Comment comment;
-
     public PostLike(boolean isLiked, User user, Post post) {
         this.isLiked = isLiked;
         this.user = user;
