@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import javax.naming.AuthenticationException;
 import java.io.IOException;
 
 @Slf4j(topic = "JWT 검증 및 인가")
@@ -53,6 +54,11 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         }
         else {
             log.info("토큰이 없음");
+//            try {
+//                throw new AuthenticationException("토큰이 없습니다");
+//            } catch (AuthenticationException e) {
+//                System.out.println(e.getMessage());
+//            }
         }
         filterChain.doFilter(req, res);
     }
