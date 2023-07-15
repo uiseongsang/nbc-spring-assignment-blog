@@ -12,7 +12,7 @@ A1) 수정, 삭제 API는 API 명세서에 보면 알수 있듯이 JSON body를 
 
 Q2) 어떤 상황에 어떤 방식의 request를 써야하나요?
 
-A2) 
+A2)
 1. param:
     - 주소에 포함된 변수를 담는다. 예를 들면 http://localhost8080/api/post/1234라는 주소가 있으면 1234를 담는다.
     - resource를 식별해야하는 상황에서는 Path Variable이 적합.
@@ -46,12 +46,12 @@ A4) 네! MVC 패턴으로 잘 분리해서 잘 주입 받아서 설계를 하였
 2. 전체 게시글 목록 조회 API
     - 제목, 작성자명, 작성 내용, 작성 날짜를 조회하기
     - 작성 날짜 기준 내림차순으로 정렬하기
-3. 게시글 작성 API 
+3. 게시글 작성 API
     - 제목, 작성자명, 비밀번호, 작성 내용을 저장하고
     - 저장된 게시글을 Client 로 반환하기
-4. 선택한 게시글 조회 API 
-    - 선택한 게시글의 제목, 작성자명, 작성 날짜, 작성 내용을 조회하기 
-    (검색 기능이 아닙니다. 간단한 게시글 조회만 구현해주세요.)
+4. 선택한 게시글 조회 API
+    - 선택한 게시글의 제목, 작성자명, 작성 날짜, 작성 내용을 조회하기
+(검색 기능이 아닙니다. 간단한 게시글 조회만 구현해주세요.)
 5. 선택한 게시글 수정 API
     - 수정을 요청할 때 수정할 데이터와 비밀번호를 같이 보내서 서버에서 비밀번호 일치 여부를 확인 한 후
     - 제목, 작성자명, 작성 내용을 수정하고 수정된 게시글을 Client 로 반환하기
@@ -65,41 +65,6 @@ A4) 네! MVC 패턴으로 잘 분리해서 잘 주입 받아서 설계를 하였
 # API 
 ![API specification](https://github.com/uiseongsang/blog/assets/40707686/1abd2931-4dad-4e53-b915-db36d72bdd4b)
 
-# Postman Test
-
-## Post Test
-Post - /api/post
-![](https://velog.velcdn.com/images/uiseongsang/post/39ff530e-fffb-4d0a-8644-0b6e632eddc0/image.png)
-
-## Get Test
-Get - /api/posts
-![](https://velog.velcdn.com/images/uiseongsang/post/c4a462aa-89ed-42fd-922e-2f74f22bf9a3/image.png)
-
-Get - /api/post/2
-![](https://velog.velcdn.com/images/uiseongsang/post/fa335fcd-6529-4ceb-a48d-9ea086508c6a/image.png)
-
-## Put Test
-Put = /api/post/4
-
-1. 먼저 Post를 만들어 준다
-![](https://velog.velcdn.com/images/uiseongsang/post/9ffec36b-fd6f-4793-ab9d-e41b3b5f139b/image.png)
-2. 수정하기
-![](https://velog.velcdn.com/images/uiseongsang/post/dfeda253-5152-439a-aa3a-160c15764995/image.png)
-3. 수정 확인하기
-![](https://velog.velcdn.com/images/uiseongsang/post/3b36cfcd-a272-4ff3-a62f-115ed10e7a81/image.png)
-
-## Delete Test
-Delete - /api/post/4
-
-1.삭제하기
-![](https://velog.velcdn.com/images/uiseongsang/post/ca03a2ac-bc03-485d-9d78-6e214829a0b9/image.png)
-2.삭제확인
-![](https://velog.velcdn.com/images/uiseongsang/post/86452faf-6421-429e-bad3-5a86833634c9/image.png)
-
-3.모든 포스트확인
-![](https://velog.velcdn.com/images/uiseongsang/post/bbf9bca3-c000-49a3-a671-89e434d141c8/image.png)
-
-
 ----------
 
 # spring-lv2
@@ -108,7 +73,7 @@ Delete - /api/post/4
 
 ------
 
-Q1) 처음 설계한 API와 ERD에 변경사항이 있었나요? 
+Q1) 처음 설계한 API와 ERD에 변경사항이 있었나요?
 변경되었다면 어떤 점 때문일까요? 첫 설계의 중요성에 대해 생각해보세요
 
 A1) 첫 설계는 기본 틀을 잡아주는 역할로써 개발하는데 가이드를 해주는 역할이라고 생각합니다.
@@ -184,25 +149,6 @@ A4)
 
 # ERD
 ![image](https://github.com/uiseongsang/spring-lv2/assets/40707686/c8450eea-f891-4bc0-b910-4a38079677b6)
-
-
-
- # PostMan Test
- 
-## Signup
-![Pasted Graphic](https://github.com/uiseongsang/spring-lv2/assets/40707686/cf866a7b-2ca8-45a0-aa8d-774ec3c91904)
-
-## Login
-![Pasted Graphic 1](https://github.com/uiseongsang/spring-lv2/assets/40707686/36839527-92e1-45a1-a119-5d8498d6cfc5)
-
-## Post
-![Pasted Graphic 5](https://github.com/uiseongsang/spring-lv2/assets/40707686/674c12c9-27d2-43b2-bb1c-2d4220d9a966)
-
- ## Put
- ![image](https://github.com/uiseongsang/spring-lv2/assets/40707686/f0a74c1c-605d-4d31-acbd-c3dd1c7265ab)
-
- ## Delete
- ![image](https://github.com/uiseongsang/spring-lv2/assets/40707686/ea034dc9-9a6f-4885-bcc7-8300c7ebf1de)
 
 -> lv2 코드 보고 싶거나 복습하고 싶으면 인가된 사용자가 작성한 게시글 POST/PUT/DELETE Commit에서 새로운 브랜치 만들어서 보면 된다!!
 
